@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Training free method to generate spatial audio from images, animated images, and videos.">
+  <meta name="keywords" content="SEE2SOUND, Spatial Audio Generation, Zero-shot Models, Visual-conditioned Audio Generation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    SEE-2-SOUND
+  </title>
+
+  <!-- CSS for color classes -->
+  <style>
+    .color1 { color: rgb(224, 71, 153); }
+    .color2 { color: rgb(209, 94, 153); }
+    .color3 { color: rgb(194, 117, 153); }
+    .color4 { color: rgb(179, 140, 153); }
+    .color5 { color: rgb(164, 163, 153); }
+    .color6 { color: rgb(149, 166, 162); }
+    .color7 { color: rgb(134, 169, 171); }
+    .color8 { color: rgb(101, 174, 172); }
+    .color9 { color: rgb(84, 177, 172); }
+    .color10 { color: rgb(67, 180, 173); }
+
+    .publication-title span:not(:last-child) {
+      margin-right: -0.2em;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 300px;
+      margin-bottom: 15px;
+    }
+
+    .image-container img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+  </style>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title"> SEE-2-SOUND:
+            Zero-Shot Spatial Environment-to-Spatial Sound</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://rishitdagli.com/">Rishit Dagli</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://shivesh777.github.io/">Shivesh Prakash</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.cs.toronto.edu/~rupert/">Robert Wu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.ca/citations?user=qzhk98YAAAAJ&hl=en">Houman Khosravani</a><sup>1,2,3</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Toronto,</span>
+            <span class="author-block"><sup>2</sup>Temerty Centre for Artificial Intelligence Research and Education in Medicine,</span>
+            <span class="author-block"><sup>3</sup>Sunnybrook Research Institute,</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="TODO:ARXIV PDF LINK"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="TODO:ARXIV LINK"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+<!--               <span class="link-block">
+                <a href="TODO:YT VIDEO LINK"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/see2sound/see2sound"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="container">
+    <h2 class="subtitle has-text-centered">
+      <span style="color: #4DAF50">
+        SEE-2-SOUND generates spatial audio from images, animated images, and videos.
+      </span>
+    </h2>
+  </div>
+</section>
+<br><br>
+<section class="hero is-light is-small">
+  <div class="container">
+    <div class="hero-body">
+      <div class="columns is-centered">
+        <div class="column is-one-third">
+          <video id="video1" controls playsinline height="100%">
+            <source src="./static/videos/sora1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-one-third">
+          <video id="video2" controls playsinline height="100%">
+            <source src="./static/videos/sora2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-one-third">
+          <video id="video3" controls playsinline height="100%">
+            <source src="./static/videos/sora3.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Our method works great on videos generated by OpenAI's Sora and can be used to generate spatial audio for video generation models.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" controls playsinline height="100%">
+            <source src="./static/videos/results4_7r.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" controls playsinline height="100%">
+            <source src="./static/videos/results2_13r.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" controls playsinline height="100%">
+            <source src="./static/videos/results4_11r.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" controls playsinline height="100%">
+            <source src="./static/videos/results2_12r.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" controls playsinline height="100%">
+            <source src="./static/videos/results4_5r.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <br><h2 class="subtitle has-text-centered">
+        Our method also works great for images from the web.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Generating combined visual and auditory sensory experiences is critical for the consumption of immersive content. Recent advances in neural generative models have enabled the creation of high-resolution content across multiple modalities, including images, text, speech, and videos. Despite these successes, there remains a significant gap in the generation of high-quality spatial audio that complements the generated visual content. Furthermore, current audio generation models excel in either generating natural audio or speech or music but fall short in integrating spatial audio cues necessary for immersive experiences. In this work, we introduce our framework, \acronym, a zero-shot approach based on decomposing the task into identifying visual regions of interest, locating these elements in 3D space, generating mono-audio for each and finally integrating them into spatial audio. Using our framework, we demonstrate compelling results for generating spatial audio for high-quality videos, images, and dynamic images from the Internet, as well as media generated by learned approaches.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+<!--     <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="TODO: YT VIDEO LINK https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      <!-- Visual Effects. -->
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-3">Mono Audio</h2>
+          <p>
+            A mono audio clip.
+          </p>
+          <video id="dollyzoom" controls playsinline height="100%">
+            <source src="./static/videos/results2_12_debugged.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <!--/ Visual Effects. -->
+
+      <!-- Matting. -->
+      <div class="column">
+        <h2 class="title is-3">Spatial Audio</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              A spatial audio clip generated by SEE-2-SOUND.
+            </p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/results2_12.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Matting. -->
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">How does SEE-2-SOUND work?</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/methods.png" alt="Overview of SEE-2-SOUND" style="width: 100%;">
+          <p>
+            SEE-2-SOUND consists of three main components: source estimation, audio generation, and surround sound spatial audio generation.
+          </p>
+          <p>
+            In the source estimation phase, the model identifies regions of interest in the input media and estimates their 3D positions on a viewing sphere. It also estimates the monocular depth map of the input image to further refine the spatial information.
+          </p>
+          <p>
+            Next, in the audio generation phase, the model generates mono audio clips for each identified region of interest, leveraging a pre-trained CoDi model. These audio clips are then combined with the spatial information to create a 4D representation for each region.
+          </p>
+          <p>
+            Finally, the model generates 5.1 surround sound spatial audio by placing sound sources in a virtual room and computing Room Impulse Responses (RIRs) for each source-microphone pair. Microphones are positioned according to the 5.1 channel configuration, ensuring compatibility with prevalent audio systems and enhancing the immersive quality of the audio output.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Generated Examples</h2>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/2_14.png" alt="Example Image 1">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/2_14.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/2_21.png" alt="Example Image 2">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/2_21.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/3_1.png" alt="Example Image 3">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/3_1.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    <hr>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/3_2.png" alt="Example Image 4">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/3_2.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/3_3.png" alt="Example Image 5">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/3_3.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/3_4.png" alt="Example Image 6">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/3_4.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    <hr>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/3_7.png" alt="Example Image 4">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/3_7.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/3_8.png" alt="Example Image 5">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/3_8.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/3_9.png" alt="Example Image 6">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/3_9.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    <hr>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/3_11.png" alt="Example Image 4">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/3_11.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/4_2.png" alt="Example Image 5">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/4_2.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/4_8.png" alt="Example Image 6">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/4_8.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    <hr>
+    <div class="columns is-centered">
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/4_9.png" alt="Example Image 4">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/4_9.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <figure class="image-container">
+          <img src="./static/images/4_10.png" alt="Example Image 5">
+        </figure>
+        <audio controls>
+          <source src="./static/audios/4_10.wav" type="audio/wav">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    <hr>
+  </div>
+</section>
+  
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>empty</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="TODO: LOCAL PDF PATH./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/see2sound/see2sound" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of <a 
+              href="https://nerfies.github.io/">Nerfies website</a>, we just ask that you link back to <a 
+              href="https://nerfies.github.io/">Nerfies page</a> in the footer.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
