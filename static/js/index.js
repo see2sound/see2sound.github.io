@@ -75,4 +75,46 @@ $(document).ready(function() {
 
     bulmaSlider.attach();
 
+    function pauseHoverVideo(video, cell) {
+      video.pause();
+      try { video.currentTime = 0; } catch (_) {}
+      if (cell) cell.classList.remove('is-playing');
+    }
+
+    function setupHoverVideos() {
+      document.querySelectorAll('.hover-video-cell').forEach(function(cell) {
+        var video = cell.querySelector('video');
+        if (!video || video.dataset.hoverBound === '1') return;
+        video.loop = true;
+        video.playsInline = true;
+
+        function playThis() {
+          document.querySelectorAll('.hover-video-cell video').forEach(function(other) {
+            if (other !== video) {
+              pauseHoverVideo(other, other.closest('.hover-video-cell'));
+            }
+          });
+          video.play().then(function() {
+            cell.classList.add('is-playing');
+          }).catch(function() {});
+        }
+
+        cell.addEventListener('mouseenter', playThis);
+        cell.addEventListener('mouseleave', function() {
+          pauseHoverVideo(video, cell);
+        });
+        video.dataset.hoverBound = '1';
+      });
+    }
+
+    setupHoverVideos();
+
+    for (var i = 0; i < carousels.length; i++) {
+      carousels[i].on('before:show', function() {
+        document.querySelectorAll('#results-carousel .hover-video-cell video').forEach(function(video) {
+          pauseHoverVideo(video, video.closest('.hover-video-cell'));
+        });
+      });
+    }
+
 })
