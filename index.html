@@ -95,6 +95,22 @@
       color: #4a4a4a;
       margin: 0.75rem 0 1rem;
     }
+
+    .paper-preview-section {
+      background-color: #fafafa;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .paper-preview-section .links a {
+      transition: all 0.3s ease;
+    }
+
+    .paper-preview-section .links a:hover {
+      color: #209cee !important;
+      transform: translateX(5px);
+    }
   </style>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KDS9RQVP4"></script>
@@ -586,9 +602,74 @@
   </div>
 </section>
   
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1">
+      <span style="vertical-align: middle">Paper</span>
+    </h1>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 1.5rem; padding-bottom: 1.5rem;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="paper-preview-section">
+          <div class="columns is-vcentered">
+            <div class="column is-5" style="padding-right: 2.5rem;">
+              <img src="./static/images/paper_preview.png" alt="Paper thumbnail" class="image" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%;">
+            </div>
+            <div class="column is-7" style="padding-left: 3rem;">
+              <h2 class="title is-5 mb-2">SEE-2-SOUND: Zero-Shot Spatial Environment-to-Spatial Sound</h2>
+              <div class="content has-text-justified" style="font-size: 0.95rem;">
+                <p class="author-list mb-1" style="color: #4a4a4a;">
+                  <strong>Rishit Dagli</strong>,
+                  <strong>Shivesh Prakash</strong>,
+                  <strong>Robert Wu</strong>,
+                  <strong>Houman Khosravani</strong>
+                </p>
+                <p class="mb-3" style="color: #7a7a7a;"><em>University of Toronto</em></p>
+                <div class="links" style="font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 1rem;">
+                  <a href="https://arxiv.org/pdf/2406.06612" target="_blank" style="color: #3273dc; text-decoration: none; display: flex; align-items: center;">
+                    <i class="fas fa-file-pdf" style="margin-right: 0.5rem;"></i>
+                    Paper
+                  </a>
+                  <a href="https://arxiv.org/abs/2406.06612" target="_blank" style="color: #3273dc; text-decoration: none; display: flex; align-items: center;">
+                    <i class="ai ai-arxiv" style="margin-right: 0.5rem;"></i>
+                    arXiv version
+                  </a>
+                  <a href="#BibTeX" style="color: #3273dc; text-decoration: none; display: flex; align-items: center;">
+                    <i class="fas fa-quote-right" style="margin-right: 0.5rem;"></i>
+                    BibTeX
+                  </a>
+                  <a href="https://github.com/see2sound/see2sound" target="_blank" style="color: #3273dc; text-decoration: none; display: flex; align-items: center;">
+                    <i class="fab fa-github" style="margin-right: 0.5rem;"></i>
+                    Code
+                  </a>
+                  <a href="https://huggingface.co/spaces/rishitdagli/see-2-sound" target="_blank" style="color: #3273dc; text-decoration: none; display: flex; align-items: center;">
+                    <i class="far fa-images" style="margin-right: 0.5rem;"></i>
+                    Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1">
+      <span style="vertical-align: middle">BibTeX</span>
+    </h1>
+  </div>
+</section>
+  
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
     <pre><code>@InProceedings{dagli2024see2sound,
 author="Dagli, Rishit and Prakash, Shivesh and Wu, Robert and Khosravani, Houman",
 title="SEE-2-SOUND: Zero-Shot Spatial Environment-to-Spatial Sound",
