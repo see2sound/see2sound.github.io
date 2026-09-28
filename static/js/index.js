@@ -65,13 +65,15 @@ $(document).ready(function() {
         player.currentTime = player.duration / 100 * this.value;
       })
     }, false);*/
-    preloadInterpolationImages();
-
-    $('#interpolation-slider').on('input', function(event) {
-      setInterpolationImage(this.value);
-    });
-    setInterpolationImage(0);
-    $('#interpolation-slider').prop('max', NUM_INTERP_FRAMES - 1);
+    if (document.getElementById('interpolation-image-wrapper') &&
+        document.getElementById('interpolation-slider')) {
+      preloadInterpolationImages();
+      $('#interpolation-slider').on('input', function() {
+        setInterpolationImage(this.value);
+      });
+      setInterpolationImage(0);
+      $('#interpolation-slider').prop('max', NUM_INTERP_FRAMES - 1);
+    }
 
     bulmaSlider.attach();
 
@@ -82,11 +84,22 @@ $(document).ready(function() {
     }
 
     function setupHoverVideos() {
+      var canHover = window.matchMedia('(hover: hover)').matches;
+
+      if (!canHover) {
+        document.querySelectorAll('.hover-to-play').forEach(function(hint) {
+          hint.textContent = 'Tap to play.';
+        });
+      }
+
       document.querySelectorAll('.hover-video-cell').forEach(function(cell) {
         var video = cell.querySelector('video');
         if (!video || video.dataset.hoverBound === '1') return;
         video.loop = true;
         video.playsInline = true;
+        cell.setAttribute('role', 'button');
+        cell.setAttribute('tabindex', '0');
+        cell.setAttribute('aria-label', 'Play or pause this spatial-audio example');
 
         function playThis() {
           document.querySelectorAll('.hover-video-cell video').forEach(function(other) {
@@ -99,9 +112,28 @@ $(document).ready(function() {
           }).catch(function() {});
         }
 
-        cell.addEventListener('mouseenter', playThis);
-        cell.addEventListener('mouseleave', function() {
-          pauseHoverVideo(video, cell);
+        function toggleThis() {
+          if (video.paused) {
+            playThis();
+          } else {
+            pauseHoverVideo(video, cell);
+          }
+        }
+
+        if (canHover) {
+          cell.addEventListener('mouseenter', playThis);
+          cell.addEventListener('mouseleave', function() {
+            pauseHoverVideo(video, cell);
+          });
+        } else {
+          cell.addEventListener('click', toggleThis);
+        }
+
+        cell.addEventListener('keydown', function(event) {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            toggleThis();
+          }
         });
         video.dataset.hoverBound = '1';
       });

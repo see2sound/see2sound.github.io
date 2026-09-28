@@ -1,11 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="description"
         content="Training free method to generate spatial audio from images, animated images, and videos.">
   <meta name="keywords" content="SEE2SOUND, Spatial Audio Generation, Zero-shot Models, Visual-conditioned Audio Generation">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://see2sound.github.io/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SEE-2-SOUND: Zero-Shot Spatial Environment-to-Spatial Sound">
+  <meta property="og:description" content="A training-free method for generating spatial audio from images, animated images, and videos.">
+  <meta property="og:url" content="https://see2sound.github.io/">
+  <meta property="og:image" content="https://see2sound.github.io/static/images/paper_preview.png">
+  <meta property="og:image:alt" content="Preview of the SEE-2-SOUND research paper">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SEE-2-SOUND: Zero-Shot Spatial Environment-to-Spatial Sound">
+  <meta name="twitter:description" content="A training-free method for generating spatial audio from images, animated images, and videos.">
+  <meta name="twitter:image" content="https://see2sound.github.io/static/images/paper_preview.png">
+  <meta name="citation_title" content="SEE-2-SOUND: Zero-Shot Spatial Environment-to-Spatial Sound">
+  <meta name="citation_author" content="Dagli, Rishit">
+  <meta name="citation_author" content="Prakash, Shivesh">
+  <meta name="citation_author" content="Wu, Robert">
+  <meta name="citation_author" content="Khosravani, Houman">
+  <meta name="citation_publication_date" content="2025">
+  <meta name="citation_conference_title" content="ACM SIGGRAPH Conference Posters">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2406.06612">
+  <meta name="citation_arxiv_id" content="2406.06612">
   <title>
     SEE-2-SOUND
   </title>
@@ -111,6 +132,35 @@
       color: #209cee !important;
       transform: translateX(5px);
     }
+
+    .publication-authors a,
+    .paper-preview-section .links a {
+      color: #1769aa !important;
+    }
+
+    [style*="color: #7a7a7a"],
+    [style*="color:#7a7a7a"] {
+      color: #5f6368 !important;
+    }
+
+    @media (max-width: 768px) {
+      .paper-preview-section {
+        padding: 1.25rem;
+      }
+
+      .paper-preview-section .column {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .publication-title {
+        font-size: 2.15rem !important;
+        overflow-wrap: normal;
+        word-break: normal;
+      }
+    }
   </style>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KDS9RQVP4"></script>
@@ -131,7 +181,6 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
@@ -144,6 +193,7 @@
   <script src="./static/js/index.js"></script>
 </head>
 <body>
+<main>
 
 <section class="hero">
   <div class="hero-body">
@@ -604,9 +654,9 @@
   
 <section class="hero is-light is-small">
   <div class="hero-body has-text-centered">
-    <h1 class="title is-1">
+    <h2 class="title is-1">
       <span style="vertical-align: middle">Paper</span>
-    </h1>
+    </h2>
   </div>
 </section>
 
@@ -662,9 +712,9 @@
 
 <section class="hero is-light is-small">
   <div class="hero-body has-text-centered">
-    <h1 class="title is-1">
+    <h2 class="title is-1">
       <span style="vertical-align: middle">BibTeX</span>
-    </h1>
+    </h2>
   </div>
 </section>
   
@@ -684,15 +734,17 @@ isbn="979-8-4007-1549-5"
   </div>
 </section>
 
+</main>
 
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
       <a class="icon-link"
-         href="https://arxiv.org/pdf/2406.06612">
+         href="https://arxiv.org/pdf/2406.06612"
+         aria-label="SEE-2-SOUND paper PDF">
         <i class="fas fa-file-pdf"></i>
       </a>
-      <a class="icon-link" href="https://github.com/see2sound/see2sound" class="external-link" disabled>
+      <a class="icon-link external-link" href="https://github.com/see2sound/see2sound" aria-label="SEE-2-SOUND source code on GitHub">
         <i class="fab fa-github"></i>
       </a>
     </div>

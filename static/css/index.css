@@ -13,6 +13,11 @@ body {
     margin-bottom: 5px;
 }
 
+audio {
+  width: 100%;
+  max-width: 100%;
+}
+
 .dnerf {
   font-variant: small-caps;
 }
@@ -71,11 +76,16 @@ body {
 }
 
 .publication-authors a {
-   color: hsl(204, 86%, 53%) !important;
+  color: #1769aa !important;
 }
 
 .publication-authors a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
+}
+
+.footer .content a {
+  color: #1769aa;
+  text-decoration: underline;
 }
 
 .author-block {
